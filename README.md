@@ -42,17 +42,6 @@ export FENICS_SIF=$HOME/dolfinx-stable.sif
 ├── run_single_general.py       # Single-geometry pipeline (mesh → solve → G_j)
 ├── decompose_gj_extended.py    # Spatial decomposition of G_j by region
 ├── submit_all.sh               # SLURM array job submission
-├── name_light_edit.tex         # Paper LaTeX source
-├── references.bib              # Bibliography
-└── paper_outputs/              # Generated figures and data
-    ├── fig1_geometry_gallery.pdf
-    ├── fig2_slot_mechanism.pdf
-    ├── fig3_twoplate.pdf
-    ├── fig4_blade.pdf
-    ├── fig5_stylus.pdf
-    ├── paper_data.json
-    ├── experimental_predictions.txt
-    └── summary.txt
 ```
 
 ## Geometry families
@@ -79,7 +68,7 @@ The geometry functional $\mathcal{G}_j = \int_{\Gamma_e} |K_j|^2 \, dl'$ is comp
   author  = {Nadiger, Ayush},
   title   = {Geometry-dependent electric field noise in trapped-ion systems: 
              noise recycling in open electrode geometries},
-  journal = {Phys. Rev. A},
+  journal = {},
   year    = {2026},
 }
 ```
