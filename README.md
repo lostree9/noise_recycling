@@ -2,16 +2,7 @@
 
 Reproducibility repository for the August 2026 preprint by Ayush Nadiger.
 
-## Manuscript
-
-The submission source is `noise_recycling_PRA.tex`; the compiled manuscript is `noise_recycling_PRA.pdf`.
-
-Build with REVTeX 4.2:
-
-```bash
-pdflatex noise_recycling_PRA.tex
-pdflatex noise_recycling_PRA.tex
-```
+This repository contains the numerical verification, recorded data, and figure-generation code used for the manuscript. The paper source is distributed with the arXiv submission; the repository is intended to keep the computational certificate small and auditable.
 
 ## Python environment
 
@@ -52,3 +43,7 @@ B_ip = sqrt(w_i) H(x_i,p) sqrt(Delta ell_p)
 ```
 
 so that the computed spectrum approximates the continuum `L^2(Gamma_e) -> L^2(X)` response operator rather than a mesh-coordinate-dependent matrix.
+
+## Manuscript snapshot
+
+The manuscript cites commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` as the immutable numerical snapshot used for the reported results.
