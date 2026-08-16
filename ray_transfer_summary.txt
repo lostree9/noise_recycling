@@ -1,0 +1,6 @@
+r=0.99992603
+scale=1.00398739
+rel_rmse=0.01212817
+qhalf_exact_d=3.36531132
+qhalf_ray_d=3.39159378
+qhalf_relerr=0.00780982
