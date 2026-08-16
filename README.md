@@ -1,78 +1,54 @@
-# Geometry-Dependent Electric Field Noise in Trapped-Ion Systems
+# Spatial transfer of surface noise in enclosed ion traps
 
-Code and data for: *"Geometry-dependent electric field noise in trapped-ion systems: noise recycling in open electrode geometries"*
+Reproducibility repository for the August 2026 preprint by Ayush Nadiger.
 
-## Quick start
+## Manuscript
+
+The submission source is `noise_recycling_PRA.tex`; the compiled manuscript is `noise_recycling_PRA.pdf`.
+
+Build with REVTeX 4.2:
 
 ```bash
-# 1. Generate parameter files
-python run_all.py --generate-params
-
-# 2a. Run on SLURM cluster
-sbatch submit_all.sh
-
-# 2b. OR run locally (slow, ~2 hours)
-python run_all.py --local --full
-
-# 3. Generate all paper figures and data tables
-python run_all.py --all-outputs --results-dir results/
+pdflatex noise_recycling_PRA.tex
+pdflatex noise_recycling_PRA.tex
 ```
 
-## Requirements
+## Python environment
 
-- Python 3.10+
-- [DOLFINx](https://github.com/FEniCS/dolfinx) 0.8+ (for FEM solves)
-- [Gmsh](https://gmsh.info/) Python API (for meshing)
-- NumPy, Matplotlib (for analysis/plotting)
+Tested with Python 3.13 and the versions in `requirements.txt`.
 
-On a cluster with Apptainer/Singularity, use the DOLFINx container:
 ```bash
-export FENICS_SIF=$HOME/dolfinx-stable.sif
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-## Repository structure
+## Verification
 
-```
-├── run_all.py                  # Master pipeline script
-├── plot_paper_figures.py       # Generate all paper figures (Figs 1-5)
-├── generate_mesh.py            # Surface slot mesh generator
-├── generate_mesh_general.py    # Blade, two-plate, stylus mesh generators
-├── compute_gj.py               # 2D geometry functional computation
-├── compute_gj_axi.py           # Axisymmetric (stylus) computation
-├── run_single_general.py       # Single-geometry pipeline (mesh → solve → G_j)
-├── decompose_gj_extended.py    # Spatial decomposition of G_j by region
-├── submit_all.sh               # SLURM array job submission
+```bash
+python verify_reflected_path.py
 ```
 
-## Geometry families
+A successful run ends with:
 
-| Family | Parameters | Key result |
-|--------|-----------|------------|
-| Surface slot | $t/g \in [0, 4]$ | 30% enhancement from gap recycling |
-| Two-plate | $h \in [80, 800]$ µm | 2.5× enclosure enhancement |
-| Blade | $\theta \in [20°, 85°]$ | Anisotropy $\mathcal{G}_y/\mathcal{G}_x$ from 0.5 to 3.9 |
-| Stylus (axisym.) | $z_\mathrm{ion} \in [30, 200]$ µm | Effective exponent −4.7 (vs. −4.0) |
-
-## Method
-
-The geometry functional $\mathcal{G}_j = \int_{\Gamma_e} |K_j|^2 \, dl'$ is computed by:
-1. Decomposing the Dirichlet Green's function as $G = G_0 + H$
-2. Solving $-\Delta H = 0$ with FEniCSx (P2 elements, direct solver)
-3. Finite-differencing the ion position to obtain $K_j$
-4. Integrating $|K_j|^2$ over electrode boundaries
-
-## Citation
-
-```bibtex
-@article{Nadiger2026,
-  author  = {Nadiger, Ayush},
-  title   = {Geometry-dependent electric field noise in trapped-ion systems: 
-             noise recycling in open electrode geometries},
-  journal = {},
-  year    = {2026},
-}
+```text
+ALL CHECKS PASSED
 ```
 
-## License
+The verification script checks numerical consequences of the analytic formulas; the proofs are in the manuscript.
 
-MIT
+## Computational components
+
+- `run_ray_transfer.py` reproduces the direction-resolved, height-differenced specular-ray reconstruction used in the manuscript.
+- `bem_gain_contrast.py` reproduces the quadrature-consistent `L^2 -> L^2` BEM stress test at three panel resolutions.
+- `make_figures.py` regenerates the manuscript figures from the exact formulas and recorded CSV data.
+- `surface_noise_tools.py` contains the shared exact-kernel, BEM, and ray-tracing routines used by the focused scripts.
+- `verify_reflected_path.py` independently checks the principal analytic/numerical identities and recorded results.
+
+The BEM singular-value calculation uses orthonormal quadrature coordinates,
+
+```text
+B_ip = sqrt(w_i) H(x_i,p) sqrt(Delta ell_p)
+```
+
+so that the computed spectrum approximates the continuum `L^2(Gamma_e) -> L^2(X)` response operator rather than a mesh-coordinate-dependent matrix.
