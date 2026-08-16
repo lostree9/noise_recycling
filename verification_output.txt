@@ -1,0 +1,17 @@
+image-depth identity max abs error = 1.388e-17
+max forward difference of A_h = -2.665e-14
+D=1 W_ab(0) error = 6.939e-18
+D=2 W_ab(0) error = 1.214e-17
+open D=2 q=1: numerical=0.9390513058, Bessel=0.9390513484, error=4.26e-08
+open D=2 q=2: numerical=0.8079011960, Bessel=0.8079012243, error=2.83e-08
+open D=2 q=4: numerical=0.4509235377, Bessel=0.4509235431, error=5.42e-09
+open D=2 q=6: numerical=0.1796000660, Bessel=0.1796000666, error=6.44e-10
+h/d=1.5 finite/open ratios q=6,8,10: 1.188837, 1.118987, 1.079479
+h/d=2 finite/open ratios q=6,8,10: 1.052351, 1.031003, 1.019861
+h/d=3 finite/open ratios q=6,8,10: 1.011898, 1.006877, 1.004340
+ray certificate: {'r': 0.99992603, 'scale': 1.00398739, 'rel_rmse': 0.01212817, 'qhalf_exact_d': 3.36531132, 'qhalf_ray_d': 3.39159378, 'qhalf_relerr': 0.00780982}
+BEM panel=0.070: gain=3.398482, sigma10 ratio=0.651003, r_eff ratio=0.911402
+BEM panel=0.050: gain=3.415567, sigma10 ratio=0.654674, r_eff ratio=0.911159
+BEM panel=0.035: gain=3.430371, sigma10 ratio=0.656794, r_eff ratio=0.911484
+BEM all-surfaces-noisy control sigma10 ratio=3.516727
+ALL CHECKS PASSED
