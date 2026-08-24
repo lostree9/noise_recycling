@@ -8,7 +8,9 @@ The paper studies a fixed noisy electrode surface under a passive grounded enclo
 \alpha_n = |d - 2nh|.
 \]
 
-Those depths set the spatial transfer kernel through a Laplace transform. The same path family also gives the zero-wavenumber "noise recycling" increase in total heating. The manuscript then proves the fine-scale direct-path limit and tests the geometric picture with ray tracing and BEM.
+Those depths set the spatial transfer kernel through a Laplace transform. The enclosure also creates extra reflected/image contributions from the same fixed noisy surface, so the ion couples to that source through more than the direct path. The manuscript calls the resulting zero-wavenumber increase in total coupling **noise recycling**. No new fluctuating source is implied by the term.
+
+The paper then proves the fine-scale direct-path limit and tests the geometric picture with ray tracing and BEM.
 
 ## Files
 
