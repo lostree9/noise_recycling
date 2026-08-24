@@ -1,21 +1,23 @@
 # Spatial transfer of surface noise in enclosed ion traps
 
-Reproducibility code for Ayush Nadiger's undergraduate honors-thesis manuscript, dated April 2026.
+Reproducibility code for Ayush Nadiger's undergraduate honors-thesis manuscript, dated April 2026. The manuscript and bibliography are intentionally kept as an April 2026 record; later journal versions of cited preprints are not substituted into this version.
 
-The paper studies a fixed noisy electrode surface under a passive grounded enclosure. In the parallel strip, electrostatic images and billiard unfolding give the same path depths
+The paper studies a fixed noisy electrode surface under a passive grounded enclosure. In the parallel strip, electrostatic images and billiard unfolding give the same unfolded normal depths
 
 \[
 \alpha_n = |d - 2nh|.
 \]
 
-Those depths set the spatial transfer kernel through a Laplace transform. The enclosure also creates extra reflected/image contributions from the same fixed noisy surface, so the ion couples to that source through more than the direct path. The manuscript calls the resulting zero-wavenumber increase in total coupling **noise recycling**. No new fluctuating source is implied by the term.
+These are normal image depths, not the full Euclidean lengths of laterally displaced ray trajectories. Their Laplace transform sets the spatial transfer kernel in the exact strip. Full reflected-path length appears only as a possible analogue when the paper discusses more general domains.
+
+The enclosure also creates extra reflected/image contributions from the same fixed noisy surface, so the ion couples to that source through more than the direct path. The manuscript calls the resulting zero-wavenumber increase in total coupling **noise recycling**. No new fluctuating source is implied by the term.
 
 The paper then proves the fine-scale direct-path limit and tests the geometric picture with ray tracing and BEM.
 
 ## Files
 
 - `verify_reflected_path.py` checks the main analytic and numerical identities.
-- `run_ray_transfer.py` reproduces the direction-resolved billiard reconstruction.
+- `run_ray_transfer.py` reproduces the direction-resolved ray reconstruction.
 - `bem_gain_contrast.py` reproduces the quadrature-consistent non-flat BEM sweep.
 - `bem_mode_diagnostic.py` checks that higher BEM singular modes correspond to finer source patterns in the slotted test geometry.
 - `make_figures.py` regenerates the transfer, ray, and BEM summary figures.
