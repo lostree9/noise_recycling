@@ -1,6 +1,6 @@
 # Spatial transfer of surface noise in enclosed ion traps
 
-Source and reproducibility code for Ayush Nadiger's undergraduate honors-thesis manuscript, dated April 2026.
+Reproducibility code for Ayush Nadiger's undergraduate honors-thesis manuscript, dated April 2026.
 
 The paper studies a fixed noisy electrode surface under a passive grounded enclosure. In the parallel strip, electrostatic images and billiard unfolding give the same path depths
 
@@ -12,7 +12,6 @@ Those depths set the spatial transfer kernel through a Laplace transform. The sa
 
 ## Files
 
-- `manuscript.tex` is the arXiv manuscript source.
 - `verify_reflected_path.py` checks the main analytic and numerical identities.
 - `run_ray_transfer.py` reproduces the direction-resolved billiard reconstruction.
 - `bem_gain_contrast.py` reproduces the quadrature-consistent non-flat BEM sweep.
@@ -55,4 +54,4 @@ so its singular values approximate the continuum `L^2(Gamma_e) -> L^2(X)` respon
 
 ## Numerical snapshot
 
-Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` is the original frozen numerical snapshot for the slab, ray, and BEM results. Later repository commits add the manuscript source, the unfolding schematic, and the singular-mode spatial-scale diagnostic without changing those recorded baseline results.
+Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` is the original frozen numerical snapshot for the slab, ray, and BEM results. Later repository commits add the unfolding schematic and the singular-mode spatial-scale diagnostic without changing those recorded baseline results.
