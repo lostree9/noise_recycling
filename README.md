@@ -1,12 +1,30 @@
 # Spatial transfer of surface noise in enclosed ion traps
 
-Reproducibility repository for the August 2026 preprint by Ayush Nadiger.
+Source and reproducibility code for Ayush Nadiger's undergraduate honors-thesis manuscript, dated April 2026.
 
-This repository contains the numerical verification, recorded data, and figure-generation code used for the manuscript. The paper source is distributed with the arXiv submission; the repository is intended to keep the computational certificate small and auditable.
+The paper studies a fixed noisy electrode surface under a passive grounded enclosure. In the parallel strip, electrostatic images and billiard unfolding give the same path depths
+
+\[
+\alpha_n = |d - 2nh|.
+\]
+
+Those depths set the spatial transfer kernel through a Laplace transform. The same path family also gives the zero-wavenumber "noise recycling" increase in total heating. The manuscript then proves the fine-scale direct-path limit and tests the geometric picture with ray tracing and BEM.
+
+## Files
+
+- `manuscript.tex` is the arXiv manuscript source.
+- `verify_reflected_path.py` checks the main analytic and numerical identities.
+- `run_ray_transfer.py` reproduces the direction-resolved billiard reconstruction.
+- `bem_gain_contrast.py` reproduces the quadrature-consistent non-flat BEM sweep.
+- `bem_mode_diagnostic.py` checks that higher BEM singular modes correspond to finer source patterns in the slotted test geometry.
+- `make_figures.py` regenerates the transfer, ray, and BEM summary figures.
+- `make_schematic.py` generates the strip/unfolding/return-depth schematic used near Sec. III.
+- `surface_noise_tools.py` contains the shared exact-kernel, BEM, and ray-tracing routines.
+- `ray_transfer_spectrum.csv`, `ray_transfer_summary.txt`, and `bem_gain_contrast.csv` store the recorded numerical outputs used by the paper.
 
 ## Python environment
 
-Tested with Python 3.13 and the versions in `requirements.txt`.
+Tested with Python 3.13 and the package versions listed in `requirements.txt`.
 
 ```bash
 python -m venv .venv
@@ -14,36 +32,27 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Verification
+## Reproduce the checks
 
 ```bash
 python verify_reflected_path.py
+python run_ray_transfer.py
+python bem_gain_contrast.py
+python bem_mode_diagnostic.py
+python make_figures.py
+python make_schematic.py
 ```
 
-A successful run ends with:
+`verify_reflected_path.py` ends with `ALL CHECKS PASSED` when the numerical certificates agree with the manuscript formulas.
 
-```text
-ALL CHECKS PASSED
-```
-
-The verification script checks numerical consequences of the analytic formulas; the proofs are in the manuscript.
-
-## Computational components
-
-- `run_ray_transfer.py` reproduces the direction-resolved, height-differenced specular-ray reconstruction used in the manuscript.
-- `bem_gain_contrast.py` reproduces the quadrature-consistent `L^2 -> L^2` BEM stress test at three panel resolutions.
-- `make_figures.py` regenerates the manuscript figures from the exact formulas and recorded CSV data.
-- `surface_noise_tools.py` contains the shared exact-kernel, BEM, and ray-tracing routines used by the focused scripts.
-- `verify_reflected_path.py` independently checks the principal analytic/numerical identities and recorded results.
-
-The BEM singular-value calculation uses orthonormal quadrature coordinates,
+The BEM spectrum uses quadrature-normalized coordinates,
 
 ```text
 B_ip = sqrt(w_i) H(x_i,p) sqrt(Delta ell_p)
 ```
 
-so that the computed spectrum approximates the continuum `L^2(Gamma_e) -> L^2(X)` response operator rather than a mesh-coordinate-dependent matrix.
+so its singular values approximate the continuum `L^2(Gamma_e) -> L^2(X)` response operator rather than a mesh-coordinate-dependent matrix.
 
-## Manuscript snapshot
+## Numerical snapshot
 
-The manuscript cites commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` as the immutable numerical snapshot used for the reported results.
+Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` is the original frozen numerical snapshot for the slab, ray, and BEM results. Later repository commits add the manuscript source, the unfolding schematic, and the singular-mode spatial-scale diagnostic without changing those recorded baseline results.
