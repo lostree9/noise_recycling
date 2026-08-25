@@ -1,0 +1,5 @@
+weak_heating_coefficient_infidelity_per_quanta=0.3998914066
+fit_intercept_after_floor_subtraction=1.66242548e-08
+F_no_noise_nph7=0.999982370007
+nph8_small_error_coefficient_approx=0.39997
+nph10_small_error_coefficient_approx=0.39997
