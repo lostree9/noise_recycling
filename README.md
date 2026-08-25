@@ -1,30 +1,43 @@
-# Spatial transfer of surface noise in enclosed ion traps
+# Geometry-controlled correlated quantum noise in enclosed ion traps
 
 Reproducibility code for Ayush Nadiger's undergraduate honors-thesis manuscript, dated April 2026. The manuscript and bibliography are intentionally kept as an April 2026 record; later journal versions of cited preprints are not substituted into this version.
 
-The paper studies a fixed noisy electrode surface under a passive grounded enclosure. In the parallel strip, electrostatic images and billiard unfolding give the same unfolded normal depths
+The current manuscript connects anomalous trapped-ion heating to a broader spatial quantum-noise operator. For a fixed noisy electrode surface and passive grounded geometry, the calculation follows
 
 \[
-\alpha_n = |d - 2nh|.
+\text{surface covariance}\to\text{Green operator}\to\text{billiard returns}\to C_{ij}(\omega)\to\text{collective motional noise}.
 \]
 
-These are normal image depths, not the full Euclidean lengths of laterally displaced ray trajectories. Their Laplace transform sets the spatial transfer kernel in the exact strip. Full reflected-path length appears only as a possible analogue when the paper discusses more general domains.
+In the parallel slab, electrostatic images and billiard unfolding give the same unfolded normal depths
 
-The enclosure also creates extra reflected/image contributions from the same fixed noisy surface, so the ion couples to that source through more than the direct path. The manuscript calls the resulting zero-wavenumber increase in total coupling **noise recycling**. No new fluctuating source is implied by the term.
+\[
+\alpha_n=|d-2nh|.
+\]
 
-The paper then proves the fine-scale direct-path limit and tests the geometric picture with ray tracing and BEM.
+Their return-pair spectrum determines single-ion heating and the full many-ion electric-field covariance. At \(h=2d\), the local-noise normal and tangential heating ratios are exactly \(\zeta(3)\) and \(\eta(3)=3\zeta(3)/4\). For any finite equal-height ion array with unchanged stationary source statistics, the passive cover obeys the Loewner inequalities
 
-## Files
+\[
+C_h^{(y)}-C_\infty^{(y)}\succeq0,
+\qquad
+C_\infty^{(x)}-C_h^{(x)}\succeq0.
+\]
 
-- `verify_reflected_path.py` checks the main analytic and numerical identities.
-- `run_ray_transfer.py` reproduces the direction-resolved ray reconstruction.
-- `bem_gain_contrast.py` reproduces the quadrature-consistent non-flat BEM sweep.
-- `bem_mode_diagnostic.py` checks that higher BEM singular modes correspond to finer source patterns in the slotted test geometry.
-- `billiard_anomalous_heating.py` is a post-thesis research extension that connects the return-depth representation directly to anomalous motional heating. It checks the exact `h/d=2` identities `Gy/Gy_open = zeta(3)` and `Gx/Gx_open = eta(3) = 3 zeta(3)/4`, finite-correlation-length filtering, and two-ion noise correlations. These results are not part of the frozen April 2026 thesis record unless explicitly folded into a later manuscript revision.
-- `make_figures.py` regenerates the transfer, ray, and BEM summary figures.
-- `make_schematic.py` generates the strip/unfolding/return-depth schematic used near Sec. III.
-- `surface_noise_tools.py` contains the shared exact-kernel, BEM, and ray-tracing routines.
-- `ray_transfer_spectrum.csv`, `ray_transfer_summary.txt`, and `bem_gain_contrast.csv` store the recorded numerical outputs used by the paper.
+Beyond parallel walls, a screened boundary-element calculation tests the non-flat billiard picture: large longitudinal wavenumber selects specular stationary paths, path length fixes the exponential action, and curvature enters through the focusing prefactor.
+
+## Main scripts
+
+- `verify_reflected_path.py` checks the original strip identities and numerical certificates.
+- `run_ray_transfer.py` reproduces the constructive direction-resolved ray reconstruction.
+- `billiard_anomalous_heating.py` reproduces the exact slab heating, polarization, correlation-length, and two-ion results used in the thesis manuscript.
+- `many_ion_quantum_noise.py` builds N-ion covariance matrices, collective channel spectra, effective noise ranks, and bus-mode exposure ratios.
+- `normal_mode_projection.py` compares the environmental eigenvectors with an illustrative finite-chain motional-mode basis.
+- `screened_bem_billiards.py` contains the singularity-corrected screened BEM used for curved covers.
+- `curved_multi_ion_noise.py` builds the five-probe curved-boundary covariance slice.
+- `ms_gate_heating_channel.py` reconstructs a primitive Mølmer-Sørensen gate channel under symmetric classical motional diffusion.
+- `verify_qis_results_final.py` is the integrated numerical certificate for the current manuscript.
+- `make_schematic.py` generates the strip/unfolding/return-depth schematic.
+
+The older `bem_gain_contrast.py` and `bem_mode_diagnostic.py` files record the earlier slotted-enclosure stress tests retained as project history; they are no longer the main non-flat evidence in the integrated manuscript.
 
 ## Python environment
 
@@ -36,28 +49,25 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Reproduce the checks
+## Reproduce the principal calculations
 
 ```bash
-python verify_reflected_path.py
-python run_ray_transfer.py
-python bem_gain_contrast.py
-python bem_mode_diagnostic.py
-python make_figures.py
-python make_schematic.py
 python billiard_anomalous_heating.py
+python many_ion_quantum_noise.py
+python normal_mode_projection.py
+python ms_gate_heating_channel.py
+python curved_multi_ion_noise.py
+python verify_qis_results_final.py
 ```
 
-`verify_reflected_path.py` ends with `ALL CHECKS PASSED` when the numerical certificates agree with the manuscript formulas.
-
-The BEM spectrum uses quadrature-normalized coordinates,
+The final verification script ends with
 
 ```text
-B_ip = sqrt(w_i) H(x_i,p) sqrt(Delta ell_p)
+ALL FINAL QIS CHECKS PASSED
 ```
 
-so its singular values approximate the continuum `L^2(Gamma_e) -> L^2(X)` response operator rather than a mesh-coordinate-dependent matrix.
+when the recorded numerical outputs agree with the manuscript claims.
 
-## Numerical snapshot
+## Numerical provenance
 
-Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` is the original frozen numerical snapshot for the slab, ray, and BEM results. Later repository commits add the unfolding schematic, singular-mode spatial-scale diagnostic, and explicitly marked post-thesis billiard/heating extensions without changing those recorded baseline results.
+Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` remains the original frozen numerical snapshot for the early slab, ray, and slotted-BEM calculations. Subsequent commits extend the same undergraduate thesis project with the return-pair heating formulation, many-ion covariance theorem, collective-noise analysis, corrected screened-BEM saddle tests, and primitive gate-level calculation.
