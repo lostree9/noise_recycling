@@ -75,6 +75,7 @@ def covariance_matrix(N=10, spacing=0.6, hd=np.inf, xi=0.0, component='normal'):
     _COV_CACHE[key]=C
     return C.copy()
 
+
 def participation_rank(C):
     return float(np.trace(C)**2 / np.trace(C@C))
 
@@ -155,6 +156,7 @@ def make_figure():
     fig.savefig(ROOT/'fig_many_ion_quantum_noise.png',dpi=240)
     plt.close(fig)
 
+    # Leading collective jump profiles, as a small companion figure/data.
     df=[]
     for name,C in [('open',Copen),('h2',C2)]:
         lam,V=eigsorted(C)
@@ -203,6 +205,7 @@ def verification_table():
             rows.append((xi,hd,participation_rank(Cy),entropy_rank(Cy),participation_rank(Cx),entropy_rank(Cx)))
     pd.DataFrame(rows,columns=['xi_over_d','h_over_d','rank_y','entropy_rank_y','rank_x','entropy_rank_x']).to_csv(ROOT/'many_ion_rank_table.csv',index=False)
 
+    # Numerical Loewner checks for several finite arrays/source spectra.
     checks=[]
     for N in [3,5,10,16]:
         for a in [0.25,0.6,1.0]:
