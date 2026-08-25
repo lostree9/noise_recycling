@@ -1,0 +1,27 @@
+open Gy/Gx prefactors: 0.0596831036595 / 0.0298415518297
+h/d=2 normal/tangential ratios: 1.202056903160 / 0.901542677370
+pointwise polarization inequalities: PASS
+sharp high-q coefficient c(2): 9.33520829
+two-ion common-frequency correlations: -0.044194 / 0.038328
+flat BEM max amplitude rel error: 0.2588%
+16-cover Pearson/Spearman: 0.99907785 / 0.99337775
+16-cover MAE/median rel error: 0.020376 d / 0.9778%
+off-axis subset Pearson: 0.99293539 (n=7)
+BEM exponent spreads flat/offaxis/fd: 6.3128e-05 / 0.00142277 / 0.000234378
+off-axis specular/vertical/BEM: 2.518435 / 1.711461 / 2.565768
+shape derivative max rel error: 1.4934%
+focusing / multiple-saddle correlations: 0.99972654 / 0.98571526
+many-ion participation rank open/h2: 5.610465 / 5.105665
+leading channel share open/h2: 0.236565 / 0.286281
+xi=d rank open/h2: 3.480106 / 3.027384
+bus exposure ratios y+/y-/x+/x-: 1.236825/1.043769/0.878273/0.966641
+mean mode/environment overlap open/h2: 0.871570 / 0.918165
+common-mode noise share open/h2: 0.223119 / 0.275023
+curved-slice ranks flat/depressed: 2.731627 / 2.578117
+leading-channel centroid flat/depressed: 0.000000 / 0.421336
+primitive MS weak-diffusion coefficient: 0.399891407
+nph>=7 slope range: 0.399837269--0.399891407
+cover-noise threshold chi: 0.10920983
+ideal 3sigma repeats normal/tangent: 5 / 19
+manuscript-source checks: SKIPPED (source distributed separately)
+ALL FINAL QIS CHECKS PASSED
