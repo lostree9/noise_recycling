@@ -1,6 +1,6 @@
 # Reproducibility bundle: geometry-controlled correlated electric-field noise
 
-This repository accompanies the manuscript **Geometry-controlled correlated electric-field noise in enclosed ion traps from billiard return spectra** (April 2026; revised August 2026). The bibliography intentionally uses versions available by the original April 2026 thesis date; later publication metadata is not substituted into this historical record.
+This repository accompanies the manuscript **Geometry-controlled correlated electric-field noise in enclosed ion traps from billiard return spectra** (April 2026; revised August 2026).
 
 The calculation follows
 
@@ -74,4 +74,4 @@ The older `verify_qis_results_final.py`, `verify_reflected_path.py`, `run_ray_tr
 
 ## Numerical provenance
 
-Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` is the original frozen numerical snapshot for the early slab, ray, and slotted-BEM calculations. Later commits extend the same undergraduate thesis project with the return-pair heating formulation, many-ion covariance theorem, collective-noise analysis, corrected screened-BEM saddle tests, and the primitive gate-level calculation.
+Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` is the original frozen numerical snapshot for the early slab, ray, and slotted-BEM calculations. Later commits extend the same thesis project with the return-pair heating formulation, many-ion covariance theorem, collective-noise analysis, corrected screened-BEM saddle tests, and the primitive gate-level calculation.
