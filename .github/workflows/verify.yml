@@ -16,5 +16,5 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run integrated certificate
-        run: python verify_qis_results_final.py
+      - name: Run final PRA certificate
+        run: python verify_pra_results_final.py
