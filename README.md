@@ -20,6 +20,7 @@ The paper then proves the fine-scale direct-path limit and tests the geometric p
 - `run_ray_transfer.py` reproduces the direction-resolved ray reconstruction.
 - `bem_gain_contrast.py` reproduces the quadrature-consistent non-flat BEM sweep.
 - `bem_mode_diagnostic.py` checks that higher BEM singular modes correspond to finer source patterns in the slotted test geometry.
+- `billiard_anomalous_heating.py` is a post-thesis research extension that connects the return-depth representation directly to anomalous motional heating. It checks the exact `h/d=2` identities `Gy/Gy_open = zeta(3)` and `Gx/Gx_open = eta(3) = 3 zeta(3)/4`, finite-correlation-length filtering, and two-ion noise correlations. These results are not part of the frozen April 2026 thesis record unless explicitly folded into a later manuscript revision.
 - `make_figures.py` regenerates the transfer, ray, and BEM summary figures.
 - `make_schematic.py` generates the strip/unfolding/return-depth schematic used near Sec. III.
 - `surface_noise_tools.py` contains the shared exact-kernel, BEM, and ray-tracing routines.
@@ -44,6 +45,7 @@ python bem_gain_contrast.py
 python bem_mode_diagnostic.py
 python make_figures.py
 python make_schematic.py
+python billiard_anomalous_heating.py
 ```
 
 `verify_reflected_path.py` ends with `ALL CHECKS PASSED` when the numerical certificates agree with the manuscript formulas.
@@ -58,4 +60,4 @@ so its singular values approximate the continuum `L^2(Gamma_e) -> L^2(X)` respon
 
 ## Numerical snapshot
 
-Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` is the original frozen numerical snapshot for the slab, ray, and BEM results. Later repository commits add the unfolding schematic and the singular-mode spatial-scale diagnostic without changing those recorded baseline results.
+Commit `81c8d5aee5150e1bb124f645ad419d792ec6ca84` is the original frozen numerical snapshot for the slab, ray, and BEM results. Later repository commits add the unfolding schematic, singular-mode spatial-scale diagnostic, and explicitly marked post-thesis billiard/heating extensions without changing those recorded baseline results.
