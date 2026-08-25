@@ -170,16 +170,24 @@ require(Nnormal==5 and Ntangent==19,'measurement count estimates')
 rec('cover-noise threshold chi',f'{chi:.8f}')
 rec('ideal 3sigma repeats normal/tangent',f'{Nnormal} / {Ntangent}')
 
-# H. Manuscript consistency and bibliography.
-tex=(ROOT/'main_qis.tex').read_text()
-require('0.2004' not in tex and '0.400' in tex,'stale gate coefficient')
-require('Markov heating term $\\dot{\\bar n}_{\\rm bus}\\mathcal D[a^\\dagger]$' not in tex,'stale one-way gate Lindblad')
-require('large-$q$ saddles' not in tex,'ambiguous q notation')
-bibs=re.findall(r'\\bibitem\{([^}]+)\}',tex); body=tex.split('\\begin{thebibliography}')[0]
-for bib in bibs:
-    require(re.search(r'\\cite\{[^}]*\\b'+re.escape(bib)+r'\\b[^}]*\}',body) is not None,f'uncited bibliography item {bib}')
-require('2027' not in tex,'post-date reference')
-rec('bibliography citation coverage',f'PASS ({len(bibs)} items)')
+# H. Manuscript consistency and bibliography, when manuscript source is present.
+# The standalone reproducibility archive contains numerical code/data only.
+tex_path = ROOT/'main_qis.tex'
+if not tex_path.exists():
+    alt = ROOT/'main.tex'
+    tex_path = alt if alt.exists() else None
+if tex_path is not None:
+    tex=tex_path.read_text()
+    require('0.2004' not in tex and '0.400' in tex,'stale gate coefficient')
+    require('Markov heating term $\\dot{\\bar n}_{\\rm bus}\\mathcal D[a^\\dagger]$' not in tex,'stale one-way gate Lindblad')
+    require('large-$q$ saddles' not in tex,'ambiguous q notation')
+    bibs=re.findall(r'\\bibitem\{([^}]+)\}',tex); body=tex.split('\\begin{thebibliography}')[0]
+    for bib in bibs:
+        require(re.search(r'\\cite\{[^}]*\b'+re.escape(bib)+r'\b[^}]*\}',body) is not None,f'uncited bibliography item {bib}')
+    require('2027' not in tex,'post-date reference')
+    rec('bibliography citation coverage',f'PASS ({len(bibs)} items)')
+else:
+    rec('manuscript-source checks','SKIPPED (source distributed separately)')
 
 out='\n'.join(report)+'\nALL FINAL QIS CHECKS PASSED\n'
 (ROOT/'verification_output_qis_final.txt').write_text(out)
