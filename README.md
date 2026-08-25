@@ -1,8 +1,8 @@
-# Geometry-controlled correlated quantum noise in enclosed ion traps
+# Reproducibility bundle: geometry-controlled correlated electric-field noise
 
-Reproducibility code for Ayush Nadiger's undergraduate honors-thesis manuscript, dated April 2026. The manuscript and bibliography are intentionally kept as an April 2026 record; later journal versions of cited preprints are not substituted into this version.
+This repository accompanies the manuscript **Geometry-controlled correlated electric-field noise in enclosed ion traps from billiard return spectra** (April 2026; revised August 2026). The bibliography intentionally uses versions available by the original April 2026 thesis date; later publication metadata is not substituted into this historical record.
 
-The current manuscript asks how passive conducting geometry restructures the spatial quantum-noise environment seen by a trapped-ion system. The calculation follows
+The calculation follows
 
 \[
 \text{surface covariance}\to\text{Green operator}\to\text{billiard returns}\to C_{ij}(\omega)\to\text{collective motional noise}.
@@ -14,7 +14,7 @@ In the parallel slab, electrostatic images and billiard unfolding give the unfol
 \alpha_n=|d-2nh|.
 \]
 
-Their return-pair spectrum determines both single-ion anomalous heating and the full many-ion electric-field covariance. At \(h=2d\), the local-noise normal and tangential heating ratios are exactly \(\zeta(3)\) and \(\eta(3)=3\zeta(3)/4\). For any finite equal-height ion array with unchanged stationary source statistics, the passive cover obeys the Loewner inequalities
+Their return-pair spectrum determines both single-ion anomalous heating and the full many-ion electric-field covariance. At \(h=2d\), the local-noise normal and tangential heating ratios are exactly \(\zeta(3)\) and \(\eta(3)=3\zeta(3)/4\). For any finite equal-height ion array with unchanged stationary source statistics, the passive cover obeys
 
 \[
 C_h^{(y)}-C_\infty^{(y)}\succeq0,
@@ -24,31 +24,9 @@ C_\infty^{(x)}-C_h^{(x)}\succeq0.
 
 Beyond parallel walls, a screened boundary-element calculation tests the non-flat billiard picture: large invariant-direction wavenumber selects specular stationary paths, path length fixes the exponential action, and curvature enters through the focusing prefactor.
 
-## Main analysis scripts
+## Environment
 
-- `billiard_anomalous_heating.py` — exact slab heating, polarization, correlation-length, and two-ion calculations.
-- `many_ion_quantum_noise.py` — N-ion covariance matrices, Loewner checks, collective-channel spectra, participation ranks, and bus-mode exposures.
-- `normal_mode_projection.py` — illustrative projection onto a finite-chain mechanical-mode basis.
-- `screened_bem_billiards.py` — singularity-corrected screened BEM utilities for curved covers.
-- `curved_multi_ion_noise.py` — five-probe curved-boundary covariance slice.
-- `ms_gate_heating_channel.py` — primitive Mølmer-Sørensen gate channel under symmetric classical motional diffusion.
-- `verify_qis_results_final.py` — integrated numerical certificate for the current manuscript.
-
-## Production / convergence scripts
-
-- `run_screened_billiard_sweep.py` — 16-cover curved-geometry production sweep and flat exact benchmark.
-- `run_screened_convergence_v2.py` — panel-size and finite-difference convergence tests.
-- `run_billiard_prefactor_tests.py` — focusing, shape-derivative, and multiple-saddle tests.
-- `run_reflection_order_integrals.py` — one- and two-reflection Laplace-action integrals.
-- `run_ms_gate_truncation.py` — Fock-space truncation convergence of the gate calculation.
-
-The CSV files in the repository are the recorded production outputs used for the quoted numerical values. `screened_bem_curves_v2.csv` stores the individual large-wavenumber correction curves behind the 16-cover slope fits.
-
-The older `verify_reflected_path.py`, `run_ray_transfer.py`, `bem_gain_contrast.py`, and `bem_mode_diagnostic.py` files record earlier stages of the same thesis project. They are retained for provenance but are not the principal evidence in the integrated manuscript.
-
-## Python environment
-
-Tested with Python 3.13 and the pinned versions in `requirements.txt`.
+Tested with Python 3.13 and the pinned packages in `requirements.txt`.
 
 ```bash
 python -m venv .venv
@@ -56,41 +34,43 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Verify the frozen numerical snapshot
+## Fast verification
 
-After cloning the repository, the quickest end-to-end check is
+Run
 
 ```bash
-python verify_qis_results_final.py
+python verify_pra_results_final.py
 ```
 
-It should end with
+The final line should be
 
 ```text
-ALL FINAL QIS CHECKS PASSED
+ALL FINAL PRA CHECKS PASSED
 ```
 
-The verifier is standalone: if manuscript TeX is not present in the clone, manuscript-source checks are explicitly skipped rather than treated as a numerical failure.
+The verifier is standalone. Manuscript-source consistency checks are skipped when the separately distributed TeX source is absent.
 
-## Regenerate the main recorded outputs
+## Main analysis scripts
 
-The more expensive production suite is
+- `billiard_anomalous_heating.py`: exact slab heating, polarization, finite-correlation-length, and two-ion checks.
+- `many_ion_quantum_noise.py`: N-ion covariance matrices, Loewner checks, collective covariance-channel spectra, effective noise rank, and bus-mode exposure.
+- `normal_mode_projection.py`: illustrative mechanical-mode projection.
+- `screened_bem_billiards.py`: singularity-corrected screened BEM utilities for curved covers.
+- `curved_multi_ion_noise.py`: five-probe curved-boundary covariance slice.
+- `ms_gate_heating_channel.py`: primitive Mølmer-Sørensen gate channel under symmetric classical motional diffusion.
 
-```bash
-python billiard_anomalous_heating.py
-python many_ion_quantum_noise.py
-python normal_mode_projection.py
-python ms_gate_heating_channel.py
-python run_ms_gate_truncation.py
-python curved_multi_ion_noise.py
-python run_screened_billiard_sweep.py
-python run_screened_convergence_v2.py
-python run_billiard_prefactor_tests.py
-python run_reflection_order_integrals.py
-python verify_qis_results_final.py
-```
+## Production and convergence scripts
 
-The screened-BEM sweeps are the slowest part of this sequence.
+- `run_screened_billiard_sweep.py`: 16-cover curved-geometry production sweep and flat exact benchmark.
+- `run_screened_convergence_v2.py`: panel-size and finite-difference convergence tests.
+- `run_sidewall_width_check.py`: lateral-closure check at `W/d = 4, 5, 7` for two representative non-flat covers.
+- `run_billiard_prefactor_tests.py`: focusing, shape-derivative, and multiple-saddle tests.
+- `run_reflection_order_integrals.py`: one- and two-reflection Laplace-action tests.
+- `run_ms_gate_truncation.py`: Fock-space truncation convergence for the gate calculation.
+
+The CSV and TXT files are the frozen production outputs used for the quoted numerical values. In addition to correlation coefficients, the final verifier checks one-scale residuals for the focusing and split-saddle laws and the side-wall-width stability. The manuscript itself is packaged separately in the submission-source archive.
+
+The older `verify_qis_results_final.py`, `verify_reflected_path.py`, `run_ray_transfer.py`, `bem_gain_contrast.py`, and `bem_mode_diagnostic.py` are retained for provenance; `verify_pra_results_final.py` is the current submission certificate.
 
 ## Numerical provenance
 
