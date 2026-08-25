@@ -75,7 +75,6 @@ def covariance_matrix(N=10, spacing=0.6, hd=np.inf, xi=0.0, component='normal'):
     _COV_CACHE[key]=C
     return C.copy()
 
-
 def participation_rank(C):
     return float(np.trace(C)**2 / np.trace(C@C))
 
@@ -133,7 +132,7 @@ def make_figure():
     ii=np.arange(1,N+1)
     ins.plot(ii,V0[:,0],'o-',ms=2.5,lw=1,label='open')
     ins.plot(ii,V2[:,0],'s-',ms=2.5,lw=1,label=r'$h/d=2$')
-    ins.set_xticks([1,5,10]); ins.set_yticks([]); ins.set_title('leading jump profile',fontsize=6.5)
+    ins.set_xticks([1,5,10]); ins.set_yticks([]); # inset identity is given in the manuscript caption
     ins.tick_params(labelsize=6)
 
     ax=axs[1,1]
@@ -156,7 +155,7 @@ def make_figure():
     fig.savefig(ROOT/'fig_many_ion_quantum_noise.png',dpi=240)
     plt.close(fig)
 
-    # Leading collective jump profiles, as a small companion figure/data.
+    # Leading covariance eigenchannel profiles, as a small companion figure/data.
     df=[]
     for name,C in [('open',Copen),('h2',C2)]:
         lam,V=eigsorted(C)
