@@ -17,6 +17,7 @@ import math
 from pathlib import Path
 import numpy as np
 from scipy.integrate import quad
+from scipy.optimize import brentq
 from scipy.special import j0, zeta
 
 ROOT = Path(__file__).resolve().parent
