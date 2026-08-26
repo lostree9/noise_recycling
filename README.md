@@ -3,8 +3,8 @@
 Reproducibility bundle for **Ayush Nadiger**, *Geometry-controlled correlated electric-field noise in enclosed ion traps from billiard return spectra*, **arXiv:2608.24770** (2026).
 
 - Paper: https://arxiv.org/abs/2608.24770
-- Research page: https://lostree9.github.io/projects/trapped-ion-diagnostics.html
-- Author website: https://lostree9.github.io/
+- Research page: https://ayushnadiger.github.io/projects/trapped-ion-diagnostics.html
+- Author website: https://ayushnadiger.github.io/
 
 The calculation follows
 
