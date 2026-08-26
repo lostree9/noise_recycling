@@ -1,6 +1,10 @@
-# Reproducibility bundle: geometry-controlled correlated electric-field noise
+# Geometry-controlled correlated electric-field noise in enclosed ion traps
 
-This repository accompanies the manuscript **Geometry-controlled correlated electric-field noise in enclosed ion traps from billiard return spectra** (April 2026).
+Reproducibility bundle for **Ayush Nadiger**, *Geometry-controlled correlated electric-field noise in enclosed ion traps from billiard return spectra*, **arXiv:2608.24770** (2026).
+
+- Paper: https://arxiv.org/abs/2608.24770
+- Research page: https://lostree9.github.io/projects/trapped-ion-diagnostics.html
+- Author website: https://lostree9.github.io/
 
 The calculation follows
 
